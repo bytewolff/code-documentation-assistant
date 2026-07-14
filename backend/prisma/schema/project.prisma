@@ -1,0 +1,11 @@
+model Project {
+    id        String   @id @default(uuid())
+    name      String
+    source    String // "github" | "upload"
+    sourceUrl String?
+    status    String   @default("pending") // pending | processing | ready | failed
+    error     String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    chunks    Chunk[]
+}

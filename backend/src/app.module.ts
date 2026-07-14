@@ -1,12 +1,21 @@
 import { Module } from '@nestjs/common';
-import { AiService } from './modules/ai/ai.service';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { AiModule } from './modules/ai/ai.module';
 import { ConfigModule } from '@nestjs/config';
-import { PrismaModule } from './prisma/prisma.module';
+import { PrismaModule } from './common/prisma/prisma.module';
+import { ProjectsModule } from './modules/projects/projects.module';
+import { IngestionModule } from './modules/ingestion/ingestion.module';
+import { ChatModule } from './modules/chat/chat.module';
 
 @Module({
-  imports: [AiModule, ConfigModule.forRoot({ isGlobal: true }), PrismaModule],
-  controllers: [],
-  providers: [AiService],
+  imports: [
+    AiModule,
+    ConfigModule.forRoot({ isGlobal: true }),
+    EventEmitterModule.forRoot(),
+    PrismaModule,
+    ProjectsModule,
+    IngestionModule,
+    ChatModule,
+  ],
 })
 export class AppModule {}
